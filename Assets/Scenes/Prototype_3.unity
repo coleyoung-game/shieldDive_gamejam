@@ -1113,6 +1113,7 @@ MonoBehaviour:
   - {fileID: 2534777230839639764, guid: 764e3a0466c385941a5105adba964a49, type: 3}
   - {fileID: 7761582358479414363, guid: 3b3ecf9c8aca84f409a7ac17cd197808, type: 3}
   - {fileID: 7761582358479414363, guid: c8e1578ce921e824fadb64adbf7c62b1, type: 3}
+  - {fileID: 7761582358479414363, guid: 0d4c267fcce62b347a5ed47c7f3f8ea8, type: 3}
   m_dragon: {fileID: 3115747024323071193, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
   _SpawnStartYPoint: -20
   m_SplitCount: 50
@@ -1674,6 +1675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d831b70a1bd9ee43849a7941c42bc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SpriteRenderer: {fileID: 0}
   maxFallSpeed: 15
   gravityValue: 0.3
   attSpeed: 30
