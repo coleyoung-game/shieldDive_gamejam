@@ -29,7 +29,7 @@ public class Monster : MonoBehaviour
         {
             gameObject.transform.position += new Vector3(moveSpeed,0,0);
         }
-        if (gameObject.transform.position.x > 4.5f || gameObject.transform.position.x < -4.5f)
+        if (gameObject.transform.position.x > GameSceneManager.Instance.WorldHeight || gameObject.transform.position.x < -GameSceneManager.Instance.WorldHeight)
         {
             moveSpeed *= -1;
         }

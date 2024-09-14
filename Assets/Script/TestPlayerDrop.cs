@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -14,6 +15,13 @@ public enum State
 public class TestPlayerDrop : MonoBehaviour
 {
     Rigidbody2D rb;
+
+    #region Y 값 제한 로직
+    private bool m_IsClamp = false;
+    private float m_CurrTime = 0.0f;
+    private float m_MaxTime = 1.0f;
+    #endregion~Y 값 제한 로직
+
     public float maxFallSpeed;
     public float gravityValue;
     public float attSpeed;
@@ -24,6 +32,7 @@ public class TestPlayerDrop : MonoBehaviour
     public float sideSpeed;
 
     public State state;
+
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +109,35 @@ public class TestPlayerDrop : MonoBehaviour
                 state = State.Idle;
                 rb.velocity = new Vector2(0f, 0f);
             }
+        }
+    }
+    private void FixedUpdate()
+    {
+        if(m_IsClamp)
+        {
+            m_CurrTime += Time.deltaTime;
+            if(m_CurrTime > m_MaxTime)
+            {
+                m_CurrTime = 0;
+                m_IsClamp = false;
+            }
+        }
+        if (transform.position.y > 9 && !m_IsClamp)
+        {
+            m_IsClamp = true;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ground"))
+        {
+            rb.simulated = false;
+        }
+        if (collision.CompareTag("Clamp"))
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
