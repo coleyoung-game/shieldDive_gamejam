@@ -17,6 +17,8 @@ public class TestPlayerDrop : MonoBehaviour
     public float maxFallSpeed;
     public float gravityValue;
     public float attSpeed;
+    public float maxdodgeCooltime;
+    float dodgecool;
 
 
     public float sideSpeed;
@@ -27,7 +29,7 @@ public class TestPlayerDrop : MonoBehaviour
     void Start()
     {
         state = State.Idle;
-
+        dodgecool = 0;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2 (0f,0f);
 
@@ -36,13 +38,21 @@ public class TestPlayerDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dodgecool > 0)
+        {
+            dodgecool -= Time.deltaTime;
+            if (dodgecool < maxdodgeCooltime - 1f && state == State.Dodge) 
+            {
+                state = State.Idle;
+            }
+        }
 
         if (rb.velocity.y > -maxFallSpeed)
         {
             rb.velocity += new Vector2(0, -gravityValue);
         }
 
-        if (state == State.Idle)
+        if (state == State.Idle || state == State.Dodge)
         {
             if (Input.GetKey(KeyCode.A))
             {
@@ -69,6 +79,17 @@ public class TestPlayerDrop : MonoBehaviour
             {
                 state = State.Att;
                 rb.velocity = new Vector2 (0f, -attSpeed);
+            }
+
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                if (dodgecool <= 0)
+                {
+                    state = State.Dodge;
+                    dodgecool = maxdodgeCooltime;
+                }
+                
+
             }
         }
 
