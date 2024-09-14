@@ -9,6 +9,12 @@ namespace Chan
         [SerializeField] private float m_DownSpeed;
         private bool m_IsUp = false;
         private bool m_IsStop = false;
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
         void Start()
         {
 
@@ -28,6 +34,7 @@ namespace Chan
             if (collision.CompareTag("Ground"))
             {
                 m_IsStop = true;
+                audioManager.PlaySFX(audioManager.princessyay);
             }
         }
 

@@ -26,11 +26,11 @@ public class TestPlayerDrop : MonoBehaviour
     private Color m_DodgeAlpha = new Color(1, 1, 1, 0.5f);
    
 
-    #region Y °ª Á¦ÇÑ ·ÎÁ÷
+    #region Y ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private bool m_IsClamp = false;
     private float m_CurrTime = 0.0f;
     private float m_MaxTime = 1.0f;
-    #endregion~Y °ª Á¦ÇÑ ·ÎÁ÷
+    #endregion~Y ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     public float maxFallSpeed;
     public float gravityValue;
@@ -109,7 +109,7 @@ public class TestPlayerDrop : MonoBehaviour
             }
 
 
-            /// TODO: getkeydownÀ¸·Î ¹Ù²ã¾ßµÉ °Í °°À½. È®ÀÎ ÇÊ¿ä
+            /// TODO: getkeydownï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ßµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. È®ï¿½ï¿½ ï¿½Ê¿ï¿½
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 OnAttack();
@@ -148,6 +148,13 @@ public class TestPlayerDrop : MonoBehaviour
         }
     }
 
+    AudioManager audioManager;
+    
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ground"))
@@ -155,6 +162,7 @@ public class TestPlayerDrop : MonoBehaviour
             rb.simulated = false;
             GameObject princess = GameObject.FindWithTag("Princess");
             princess.GetComponent<Animator>().SetTrigger("clap");
+            audioManager.PlaySFX(audioManager.princessyay);
         }
         if (collision.CompareTag("Clamp"))
         {
