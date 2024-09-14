@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8175905661101700524}
   m_Layer: 0
   m_Name: Monster
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,8 @@ MonoBehaviour:
   - 50
   - 60
   - 70
+  m_CurrLevel: 0
+  m_IsDestroy: 0
   moveSpeed: 0.05
   isMonster: 1
 --- !u!61 &7761582358479414362

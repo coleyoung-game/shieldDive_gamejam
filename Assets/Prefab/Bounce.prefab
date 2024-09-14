@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3930478528178717899}
   m_Layer: 0
   m_Name: Bounce
-  m_TagString: Untagged
+  m_TagString: Bounce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,8 @@ MonoBehaviour:
   m_BounceSpeeds:
   - 30
   - 45
+  m_CurrLevel: 0
+  m_IsDestroy: 0
   moveSpeed: 0
   isMonster: 0
 --- !u!61 &2534777230839639767
