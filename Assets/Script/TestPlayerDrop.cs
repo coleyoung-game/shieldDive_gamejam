@@ -152,6 +152,8 @@ public class TestPlayerDrop : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             rb.simulated = false;
+            GameObject princess = GameObject.FindWithTag("Princess");
+            princess.GetComponent<Animator>().SetTrigger("clap");
         }
         if (collision.CompareTag("Clamp"))
         {

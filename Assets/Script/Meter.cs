@@ -23,7 +23,7 @@ public class Meter : MonoBehaviour
             endY = GameObject.Find("StageManager").GetComponent<StageManager>().LastYValue;
         }
 
-        percent = player.transform.position.y / endY;
+        percent = player.transform.position.y / (endY+10);
         gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2 (15f, -(canvasHeight) * percent);
 
     }
