@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Clamp
+  - Audio
   layers:
   - Default
   - TransparentFX

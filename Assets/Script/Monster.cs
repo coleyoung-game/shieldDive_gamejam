@@ -19,6 +19,12 @@ public class Monster : MonoBehaviour
     //public float bounceSpeed;
     public bool isMonster;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     // Start is called before the first frame update
     void Start()
     {
