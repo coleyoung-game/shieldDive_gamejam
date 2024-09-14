@@ -4,6 +4,7 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum State
 {
@@ -15,6 +16,9 @@ public enum State
 
 public class TestPlayerDrop : MonoBehaviour
 {
+    [SerializeField] private Image m_Img_DodgeTime;
+    [SerializeField] private GameObject m_WorldCanvas;
+
     private Animator m_Animator;
     public SpriteRenderer m_SpriteRenderer;
     Rigidbody2D rb;
@@ -67,6 +71,12 @@ public class TestPlayerDrop : MonoBehaviour
         if (dodgecool > -2f)
         {
             dodgecool -= Time.deltaTime;
+            Debug.Log($"dodgecool : {dodgecool}");
+            if (dodgecool < 0.05f)
+                m_WorldCanvas.SetActive(false);
+            else
+                m_Img_DodgeTime.fillAmount = Mathf.Clamp(dodgecool, 0.0f, 1.0f);
+
             if (dodgecool < maxdodgeCooltime - dodgeLength && state == State.Dodge) 
             {
                 state = State.Idle;
@@ -238,6 +248,7 @@ public class TestPlayerDrop : MonoBehaviour
         m_Animator.SetTrigger("IsDodge");
         m_SpriteRenderer.color = m_DodgeAlpha;
         audioManager.PlaySFX(audioManager.dashavoid);
+        m_WorldCanvas.SetActive(true);
         //StartCoroutine(IE_OnDodgeHandle = IE_OnAttack());
     }
 
