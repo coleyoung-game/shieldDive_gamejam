@@ -32,6 +32,9 @@ namespace Chan
         private int m_CurrYPoint = 0;
         private int m_CurrLevel = 0;
         private int m_CreateCount = 1;
+
+        public float LastYValue;
+
         void Start()
         {
             Init();
@@ -49,6 +52,7 @@ namespace Chan
 
 
             float t_LastPos = GenerateBackground(4);
+            LastYValue = t_LastPos;
             float t_SpawnPoint = _SpawnStartYPoint;
             float t_SplitCount = m_SplitCount;
             m_Ratio = new float[m_SplitCount];
