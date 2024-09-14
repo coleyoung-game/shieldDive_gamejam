@@ -289,10 +289,10 @@ MonoBehaviour:
   trampoline: {fileID: 8300000, guid: f5168693ca9ed2449b40ef84cc7f8a9a, type: 3}
   princessyay: {fileID: 8300000, guid: 8c53f41276db9514aaa9531c570ffd58, type: 3}
   bombblow2: {fileID: 8300000, guid: f9410c8fa5cb76d46ba648a800f26e56, type: 3}
-  dragonroar: {fileID: 8300000, guid: f9edd0832118e704680f1d23bb931c95, type: 3}
+  dragonroar: {fileID: 8300000, guid: 7f3be31cc057d824c9384ef46a8bccfa, type: 3}
   attacksound: {fileID: 8300000, guid: 91c490e581e136346b20236a23305e61, type: 3}
-  spike: {fileID: 8300000, guid: d3c1ebdbacbf2cf44ad2f378b6fc538d, type: 3}
-  dashavoid: {fileID: 8300000, guid: d11dd8ac3d426c14e9bee7007d309a18, type: 3}
+  spike: {fileID: 8300000, guid: 3919e108138cc3042a197a30a6cf5880, type: 3}
+  dashavoid: {fileID: 8300000, guid: 0c664d5a079cbc044b2f9142ffa75239, type: 3}
 --- !u!4 &517685211
 Transform:
   m_ObjectHideFlags: 0
@@ -1601,6 +1601,7 @@ MonoBehaviour:
   gravityValue: 0.3
   attSpeed: 30
   maxdodgeCooltime: 1
+  dodgeLength: 0.1
   sideSpeed: 10
   state: 0
 --- !u!4 &8789726010603202517

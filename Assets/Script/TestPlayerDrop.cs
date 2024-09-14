@@ -211,6 +211,7 @@ public class TestPlayerDrop : MonoBehaviour
         dodgecool = maxdodgeCooltime;
         m_Animator.SetTrigger("IsDodge");
         m_SpriteRenderer.color = m_DodgeAlpha;
+        audioManager.PlaySFX(audioManager.dashavoid);
         //StartCoroutine(IE_OnDodgeHandle = IE_OnAttack());
     }
 
