@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
 
     float sumTime;
 
+    public bool stop;
     //TMP_Text timerText;
     Text timerText;
     int tenmin;
@@ -19,6 +20,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stop = false;
         sumTime = 0f;
         //timerText = GetComponent<TMP_Text>();
         timerText = GetComponent<Text>();
@@ -27,6 +29,10 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stop)
+        {
+            return;
+        }
         sumTime += Time.deltaTime;
         if ( sumTime > 0.1f)
         {

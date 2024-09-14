@@ -17,6 +17,7 @@ public class Monster : MonoBehaviour
     BoxCollider2D m_BoxCollider2D;
     private Animator m_Anim;
     private SpriteRenderer m_SpriteRenderer;
+    //private GameObject m_HitEffect;
 
     private Color m_HitCol = new Color(1, 0.5f, 0.5f);
 
@@ -89,9 +90,11 @@ public class Monster : MonoBehaviour
             {
                 if (playerDrop.state == State.Att)
                 {
-                    
                     GameObject t_Obj = Instantiate(Resources.Load<GameObject>("Flash_round_ellow"));
+                    //m_HitEffect.SetActive(true);
                     t_Obj.transform.position = collision.ClosestPoint(transform.position);
+                    PoolingManager.Instance.EnqueueObject(t_Obj);
+                    //Destroy(t_Obj, 1.0f);
                     playerRigidBody2D.velocity = new Vector2(0f, 1f);
                     playerDrop.state = State.Idle;
                     playerDrop.m_SpriteRenderer.color = Color.white;

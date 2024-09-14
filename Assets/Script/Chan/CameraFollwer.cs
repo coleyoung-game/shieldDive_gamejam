@@ -33,6 +33,10 @@ namespace Chan
             if (m_IsVibe)
                 return;
             m_CalcCameraPos = Vector3.up * (m_PlayerPos.position.y + m_CameraPos.y > 0 ? 0:m_PlayerPos.position.y + m_CameraPos.y);
+            if (m_CalcCameraPos.y < -341.05F)
+            {
+                m_CalcCameraPos = new Vector3(0, -341.05f, -1);
+            }
             m_CalcCameraPos.z = -1;
             transform.position = m_CalcCameraPos;
         }
