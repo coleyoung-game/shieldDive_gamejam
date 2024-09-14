@@ -90,6 +90,12 @@ public class TestPlayerDrop : MonoBehaviour
                     temp.x = -sideSpeed;
                     rb.velocity = temp;
                 }
+                else
+                {
+                    Vector2 temp = rb.velocity;
+                    temp.x = 0f;
+                    rb.velocity = temp;
+                }
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -98,6 +104,12 @@ public class TestPlayerDrop : MonoBehaviour
                     m_SpriteRenderer.flipX = true;
                     Vector2 temp = rb.velocity;
                     temp.x = sideSpeed;
+                    rb.velocity = temp;
+                }
+                else
+                {
+                    Vector2 temp = rb.velocity;
+                    temp.x = 0f;
                     rb.velocity = temp;
                 }
             }
