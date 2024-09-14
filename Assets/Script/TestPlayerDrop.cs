@@ -24,9 +24,9 @@ public class TestPlayerDrop : MonoBehaviour
     private IEnumerator IE_OnDodgeHandle = null;
 
     private Color m_DodgeAlpha = new Color(1, 1, 1, 0.5f);
-    private Color m_HitCol = new Color(1, 0.5f, 0.5f);
+    private Timer timer;
    
-
+    
     #region Y �� ���� ����
     private bool m_IsClamp = false;
     private float m_CurrTime = 0.0f;
@@ -57,7 +57,7 @@ public class TestPlayerDrop : MonoBehaviour
             m_SpriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2 (0f,0f);
-
+        timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
         Boxcollider = GetComponent<BoxCollider2D>();
     }
 
@@ -181,6 +181,7 @@ public class TestPlayerDrop : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             //Time.timeScale = 0;
+            timer.stop = true;
             rb.simulated = false;
             GameObject princess = GameObject.FindWithTag("Princess");
             princess.GetComponent<Animator>().SetTrigger("clap");
