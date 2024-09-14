@@ -16,12 +16,9 @@ public class GameSceneManager : MonoBehaviour
     private void Awake()
     {
         m_Instance = this;
-    }
-
-    void Start()
-    {
         Init();
     }
+
 
     private void Init()
     {

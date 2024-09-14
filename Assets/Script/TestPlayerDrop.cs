@@ -123,7 +123,7 @@ public class TestPlayerDrop : MonoBehaviour
 
 
             /// TODO: getkeydown���� �ٲ�ߵ� �� ����. Ȯ�� �ʿ�
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && state == State.Idle)
             {
                 OnAttack();
             }
@@ -136,11 +136,18 @@ public class TestPlayerDrop : MonoBehaviour
 
         else if (state == State.Hit) 
         {
-            if (rb.velocity.y < 0f)
+            if(IE_OnAttackHandle != null)
             {
+                StopCoroutine(IE_OnAttackHandle);
+                IE_OnAttackHandle = null;
                 state = State.Idle;
                 m_SpriteRenderer.color = Color.white;
+            }
+            if (rb.velocity.y < 0f)
+            {
+                m_SpriteRenderer.color = Color.white;
                 rb.velocity = new Vector2(0f, 0f);
+                state = State.Idle;
             }
         }
     }
@@ -209,15 +216,6 @@ public class TestPlayerDrop : MonoBehaviour
         rb.velocity = new Vector2(0f, -attSpeed);
         yield return new WaitUntil(() => m_Animator.GetCurrentAnimatorStateInfo(0).IsName("c_Attack") && m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.98f);
         yield return new WaitForSeconds(0.1f);
-
-        if (state == State.Hit)
-        {
-            IE_OnAttackHandle = null;
-            state = State.Idle;
-            m_SpriteRenderer.color = Color.white;
-            yield break;
-        }
-
         state = State.Idle;
         m_SpriteRenderer.color = Color.white;
         rb.velocity = t_PrevVelocity;

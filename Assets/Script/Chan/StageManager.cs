@@ -56,62 +56,84 @@ namespace Chan
             m_Ratio[0] = t_SpawnPoint;
             for (int i = 1; i < m_SplitCount; i++) 
             {
-                m_Ratio[i] = Mathf.Lerp(_SpawnStartYPoint, t_LastPos, i / t_SplitCount);
+                m_Ratio[i] = Mathf.Lerp(_SpawnStartYPoint, t_LastPos + 20,i / t_SplitCount);
             }
             GameObject t_End = Instantiate(Resources.Load<GameObject>("End"));
             t_End.transform.position = Vector3.up * (t_LastPos+10);
 
         }
 
+        private float easeInQuint(float _Number)
+        {
+            return 1 - Mathf.Pow(_Number, 4);
+        }
+        private float easeOutQuart(float _Number)
+        {
+            return 1 - Mathf.Pow(1 - _Number, 4);
+        }
+
         private float GenerateBackground()
         {
-            Vector3 t_DeployPos = Vector3.zero;
-            
-            GameObject t_BG = Instantiate(Resources.Load<GameObject>("BG_Sky"));
-            t_BG.transform.position = m_BackgroundSettings.StartPos;
-            t_DeployPos = m_BackgroundSettings.StartPos;
-            
-            for (int i = 0; i < 2* m_BackgroundSettings.Count - 1; i++)
-            {
-                t_BG = Instantiate(Resources.Load<GameObject>("BG_Sky"));
-                if(i % 2 == 0)
-                {
-                    t_BG.GetComponent<SpriteRenderer>().flipX = true;
-                }
-                t_DeployPos += m_BackgroundSettings.Offset;
-                t_BG.transform.position = t_DeployPos;
-            }
-            return t_DeployPos.y;
-            //return -388; 
+            //Vector3 t_DeployPos = Vector3.zero;
+            //
+            //GameObject t_BG = Instantiate(Resources.Load<GameObject>("BG_Sky"));
+            //t_BG.transform.position = m_BackgroundSettings.StartPos;
+            //t_DeployPos = m_BackgroundSettings.StartPos;
+            //
+            //for (int i = 0; i < 2* m_BackgroundSettings.Count - 1; i++)
+            //{
+            //    t_BG = Instantiate(Resources.Load<GameObject>("BG_Sky"));
+            //    if(i % 2 == 0)
+            //    {
+            //        t_BG.GetComponent<SpriteRenderer>().flipX = true;
+            //    }
+            //    t_DeployPos += m_BackgroundSettings.Offset;
+            //    t_BG.transform.position = t_DeployPos;
+            //}
+            //return t_DeployPos.y;
+            return -357;
         }
         private void CreateObstacle()
         {
             if (m_CurrYPoint >= m_Ratio.Length) return;
             if (m_Player.transform.position.y < m_Ratio[m_CurrYPoint])
             {
-                //if(m_CurrYPoint > m_SplitCount / 2)
-                //{
-                //    m_CreateCount = 2;
-                //}
+                if (m_CurrYPoint >= m_SplitCount / 2)
+                    m_CreateCount = 2;
 
                 for (int i = 0; i < m_CreateCount; i++)
                 {
                     //GameObject t_Obs = Instantiate(Resources.Load<GameObject>("OBS_A"));
                     Monster t_Obs = Instantiate(m_Monsters[Random.Range(0, m_Monsters.Length)]);
+                    t_Obs.Init();
                     // SplitCount(몬스터 스폰 빈도) / Monster Maxlevel
                     if (m_CurrYPoint % (m_SplitCount / t_Obs.HasLevelCount()) == 0)
                     {
-                        Debug.Log("LEVELUP!");
+                        //Debug.Log("LEVELUP!");
                         t_Obs.LevelUp();
                     }
-                    // 
+                    if (m_CurrYPoint >= m_SplitCount / 2)
+                        m_CreateCount = 2;
                     Vector3 t_TempVec = Vector3.up * (m_Player.transform.position.y - 13);
-                    t_TempVec.x = Random.Range(-GameSceneManager.Instance.WorldWidth, GameSceneManager.Instance.WorldWidth);
+                    
+                    if(m_CreateCount > 1)
+                    {
+                        if(i%2==0)
+                            t_TempVec.x = Random.Range(-t_Obs.WidthClamp, -0.5f);
+                        else
+                            t_TempVec.x = Random.Range(0.5f, t_Obs.WidthClamp);
+                    }
+                    else
+                        t_TempVec.x = Random.Range(-t_Obs.WidthClamp, t_Obs.WidthClamp);
+
+
+
                     t_Obs.transform.position = t_TempVec;
                     m_CurrYPoint++;
                     if (m_CurrYPoint == 30)
                     {
                         Monster t_Drg = Instantiate(m_dragon);
+                        t_Drg.Init();
                     }
                 }
             }

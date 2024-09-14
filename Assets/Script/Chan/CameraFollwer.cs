@@ -12,15 +12,26 @@ namespace Chan
         private float m_Aspect;
         private float m_WorldHeight;
         private float m_WorldWidth;
+        private bool m_IsVibe = false;
 
         private void Start()
         {
             Init();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                StartCoroutine(IE_Vibration(gameObject, 0.05f, 7, 0.2f));
+            }
+        }
+
         // Update is called once per frame
         private void LateUpdate()
         {
+            if (m_IsVibe)
+                return;
             m_CalcCameraPos = Vector3.up * (m_PlayerPos.position.y + m_CameraPos.y > 0 ? 0:m_PlayerPos.position.y + m_CameraPos.y);
             m_CalcCameraPos.z = -1;
             transform.position = m_CalcCameraPos;
@@ -32,6 +43,21 @@ namespace Chan
             m_WorldHeight = GetComponent<Camera>().orthographicSize;// * 2;
             m_WorldWidth = m_WorldHeight * m_Aspect;
             Debug.Log($"m_WorldWidth : {m_WorldWidth}, m_WorldHeight : {m_WorldHeight}");
+        }
+
+        private IEnumerator IE_Vibration(GameObject _Obj, float _IterTime, int _Count, float _Power)
+        {
+            m_IsVibe = true;
+            int t_CurrCount = 0;
+            while (t_CurrCount <=_Count)
+            {
+                yield return new WaitForSeconds(_IterTime);
+                t_CurrCount++;
+                m_CalcCameraPos = Vector3.up * (m_PlayerPos.position.y + m_CameraPos.y > 0 ? 0 : m_PlayerPos.position.y + m_CameraPos.y);
+                m_CalcCameraPos.z = -1;
+                _Obj.transform.position = new Vector3(Random.Range(-_Power, _Power), m_CalcCameraPos.y + Random.Range(-_Power, _Power), -1);
+            }
+            m_IsVibe = false;
         }
     }
 }

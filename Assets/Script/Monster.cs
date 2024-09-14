@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Monster : MonoBehaviour
 {
+    [SerializeField] private float[] m_BounceSpeeds;
+    [SerializeField] private int m_CurrLevel = 0;
+    [SerializeField] private bool m_IsDestroy;
+    
     GameObject player;
     TestPlayerDrop playerDrop;
     Rigidbody2D playerRigidBody2D;
@@ -15,13 +20,17 @@ public class Monster : MonoBehaviour
 
     private Color m_HitCol = new Color(1, 0.5f, 0.5f);
 
-    [SerializeField] private float[] m_BounceSpeeds;
-
     private IEnumerator IE_EffectAnimHandle = null;
 
-    [SerializeField] private int m_CurrLevel = 0;
-    [SerializeField] private bool m_IsDestroy;
+    private float m_WidthClamp = 0.0f;
 
+    public float WidthClamp 
+    { 
+        get 
+        { 
+            return m_WidthClamp; 
+        } 
+    }
     public float moveSpeed;
     //public float bounceSpeed;
     public bool isMonster;
@@ -35,19 +44,20 @@ public class Monster : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-        playerDrop = player.GetComponent<TestPlayerDrop>();
-        playerRigidBody2D = player.GetComponent<Rigidbody2D>();
-        m_BoxCollider2D = GetComponent<BoxCollider2D>();
-        m_Anim = GetComponent<Animator>();
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        if (isDragon)
-        {
-            audioManager.PlaySFX(audioManager.dragonroar);
-        }
-    }
+    //void Start()
+    //{
+    //    player = GameObject.FindWithTag("Player");
+    //    playerDrop = player.GetComponent<TestPlayerDrop>();
+    //    playerRigidBody2D = player.GetComponent<Rigidbody2D>();
+    //    m_BoxCollider2D = GetComponent<BoxCollider2D>();
+    //    m_Anim = GetComponent<Animator>();
+    //    m_SpriteRenderer = GetComponent<SpriteRenderer>();
+    //    if (isDragon)
+    //    {
+    //        audioManager.PlaySFX(audioManager.dragonroar);
+    //    }
+    //    m_WidthClamp = GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2;
+    //}
 
     // Update is called once per frame
     void Update()
@@ -64,7 +74,7 @@ public class Monster : MonoBehaviour
             transform.position = temp;
             return;
         }
-        if (gameObject.transform.position.x > GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2 || gameObject.transform.position.x < -GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2)
+        if (gameObject.transform.position.x > m_WidthClamp || gameObject.transform.position.x < -m_WidthClamp)
         {
             moveSpeed *= -1;
             m_SpriteRenderer.flipX = moveSpeed > 0;
@@ -79,6 +89,9 @@ public class Monster : MonoBehaviour
             {
                 if (playerDrop.state == State.Att)
                 {
+                    
+                    GameObject t_Obj = Instantiate(Resources.Load<GameObject>("Flash_round_ellow"));
+                    t_Obj.transform.position = collision.ClosestPoint(transform.position);
                     playerRigidBody2D.velocity = new Vector2(0f, 1f);
                     playerDrop.state = State.Idle;
                     playerDrop.m_SpriteRenderer.color = Color.white;
@@ -97,6 +110,8 @@ public class Monster : MonoBehaviour
 
             else
             {
+                if(playerDrop.state == State.Hit) 
+                    return;
                 if (playerDrop.state == State.Idle || playerDrop.state == State.Att)
                 {
                     if (IE_EffectAnimHandle != null)
@@ -109,6 +124,7 @@ public class Monster : MonoBehaviour
         }
 
     }
+
     private IEnumerator IE_EffectAnim()
     {
         bool t_IsAttack = playerDrop.state == State.Att;
@@ -137,6 +153,22 @@ public class Monster : MonoBehaviour
             IE_EffectAnimHandle = null;
         }
     }
+
+    public void Init()
+    {
+        player = GameObject.FindWithTag("Player");
+        playerDrop = player.GetComponent<TestPlayerDrop>();
+        playerRigidBody2D = player.GetComponent<Rigidbody2D>();
+        m_BoxCollider2D = GetComponent<BoxCollider2D>();
+        m_Anim = GetComponent<Animator>();
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        if (isDragon)
+        {
+            audioManager.PlaySFX(audioManager.dragonroar);
+        }
+        m_WidthClamp = GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2;
+    }
+
     public void LevelUp()
     {
         if (m_CurrLevel >= m_BounceSpeeds.Length - 1)

@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuBttControl : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private string m_StartSceneName;
     public void StartBttClick()
     {
-        SceneManager.LoadScene("Prototype_3");
+        SceneManager.LoadScene(m_StartSceneName);
 
     }
 
