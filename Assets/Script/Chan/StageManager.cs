@@ -47,11 +47,7 @@ namespace Chan
         }
         private void Init()
         {
-            
-
-
-
-            float t_LastPos = GenerateBackground(4);
+            float t_LastPos = GenerateBackground();
             LastYValue = t_LastPos;
             float t_SpawnPoint = _SpawnStartYPoint;
             float t_SplitCount = m_SplitCount;
@@ -59,19 +55,14 @@ namespace Chan
             m_Ratio[0] = t_SpawnPoint;
             for (int i = 1; i < m_SplitCount; i++) 
             {
-                //t_SpawnPoint -= Random.Range(m_SpawnPosRange[0], m_SpawnPosRange[1]);
-                //m_Ratio[i] = t_SpawnPoint;
                 m_Ratio[i] = Mathf.Lerp(_SpawnStartYPoint, t_LastPos, i / t_SplitCount);
             }
             GameObject t_End = Instantiate(Resources.Load<GameObject>("End"));
             t_End.transform.position = Vector3.up * (t_LastPos+10);
 
         }
-        /// <summary>
-        /// ÇÑ ½ÖÀÌ ±âº»
-        /// </summary>
-        /// <param name="_Count"></param>
-        private float GenerateBackground(int _Count)
+
+        private float GenerateBackground()
         {
             Vector3 t_DeployPos = Vector3.zero;
 
@@ -105,9 +96,13 @@ namespace Chan
                 {
                     //GameObject t_Obs = Instantiate(Resources.Load<GameObject>("OBS_A"));
                     Monster t_Obs = Instantiate(m_Monsters[Random.Range(0, m_Monsters.Length)]);
-                    //if (m_CurrYPoint > m_SplitCount / 2)
-                    //    t_Obs.bounceSpeed = 60;
-                    // »ó¼ö´Â ¿ÀºêÁ§Æ®ÀÇ »ı¼º À§Ä¡¸¦ Ä«¸Ş¶ó¿¡¼­ Æ÷ÂøµÇÁö ¾Ê±â À§ÇØ ³ÖÀº °ªÀÓ.
+                    // SplitCount(ëª¬ìŠ¤í„° ìŠ¤í° ë¹ˆë„) / Monster Maxlevel
+                    if (m_CurrYPoint % (m_SplitCount / t_Obs.HasLevelCount()) == 0)
+                    {
+                        Debug.Log("LEVELUP!");
+                        t_Obs.LevelUp();
+                    }
+                    // 
                     Vector3 t_TempVec = Vector3.up * (m_Player.transform.position.y - 13);
                     t_TempVec.x = Random.Range(-3.0f, 3.0f);
                     t_Obs.transform.position = t_TempVec;

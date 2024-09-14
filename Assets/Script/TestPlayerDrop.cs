@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -14,8 +15,16 @@ public enum State
 
 public class TestPlayerDrop : MonoBehaviour
 {
+    private Animator m_Animator;
+    private SpriteRenderer m_SpriteRenderer;
     Rigidbody2D rb;
     BoxCollider2D Boxcollider;
+
+    private IEnumerator IE_OnAttackHandle = null;
+    private IEnumerator IE_OnDodgeHandle = null;
+
+    private Color m_DodgeAlpha = new Color(1, 1, 1, 0.5f);
+   
 
     #region Y 값 제한 로직
     private bool m_IsClamp = false;
@@ -40,6 +49,10 @@ public class TestPlayerDrop : MonoBehaviour
     {
         state = State.Idle;
         dodgecool = 0;
+        if (m_Animator == null)
+            m_Animator = GetComponent<Animator>();
+        if(m_SpriteRenderer == null)
+            m_SpriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2 (0f,0f);
 
@@ -55,9 +68,11 @@ public class TestPlayerDrop : MonoBehaviour
             if (dodgecool < maxdodgeCooltime - 1f && state == State.Dodge) 
             {
                 state = State.Idle;
+                m_SpriteRenderer.color = Color.white;
             }
         }
-
+        //maxFallSpeed *= 1.001f;
+        DownSpeedUp();
         if (rb.velocity.y > -maxFallSpeed)
         {
             rb.velocity += new Vector2(0, -gravityValue);
@@ -69,6 +84,7 @@ public class TestPlayerDrop : MonoBehaviour
             {
                 if (gameObject.transform.position.x > - (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x/2))
                 {
+                    m_SpriteRenderer.flipX = false;
                     Vector2 temp = rb.velocity;
                     temp.x = -sideSpeed;
                     rb.velocity = temp;
@@ -78,6 +94,7 @@ public class TestPlayerDrop : MonoBehaviour
             {
                 if (gameObject.transform.position.x < (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x / 2))
                 {
+                    m_SpriteRenderer.flipX = true;
                     Vector2 temp = rb.velocity;
                     temp.x = sideSpeed;
                     rb.velocity = temp;
@@ -91,22 +108,15 @@ public class TestPlayerDrop : MonoBehaviour
             }
 
 
-
-            if (Input.GetKey(KeyCode.Space))
+            /// TODO: getkeydown으로 바꿔야될 것 같음. 확인 필요
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                state = State.Att;
-                rb.velocity = new Vector2 (0f, -attSpeed);
+                OnAttack();
             }
 
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                if (dodgecool <= 0)
-                {
-                    state = State.Dodge;
-                    dodgecool = maxdodgeCooltime;
-                }
-                
-
+                OnDodge();
             }
         }
 
@@ -148,5 +158,56 @@ public class TestPlayerDrop : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
+    private float m_Offset = -100;
+    private void DownSpeedUp()
+    {
+        if (transform.position.y < m_Offset)
+        {
+            Debug.Log("DownSpeedUp!");
+            m_Offset += -100;
+            maxFallSpeed *= 1.1f;
+        }
+    }
+
+    private void OnAttack()
+    {
+        if (IE_OnAttackHandle != null)
+            return;
+        StartCoroutine(IE_OnAttackHandle = IE_OnAttack());
+    }
+
+    private IEnumerator IE_OnAttack()
+    {
+        Vector2 t_PrevVelocity = rb.velocity;
+        m_Animator.SetTrigger("IsAttack");
+        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(0f, attSpeed/2);
+        yield return new WaitUntil(() => m_SpriteRenderer.sprite.name == "Attack_3");
+        state = State.Att;
+        rb.velocity = new Vector2(0f, -attSpeed);
+        yield return new WaitUntil(() => m_Animator.GetCurrentAnimatorStateInfo(0).IsName("c_Attack") && m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.98f);
+        yield return new WaitForSeconds(0.2f);
+        state = State.Idle;
+        rb.velocity = t_PrevVelocity;
+        IE_OnAttackHandle = null;
+    }
+
+    private void OnDodge()
+    {
+        if (IE_OnDodgeHandle != null)
+            return;
+        state = State.Dodge;
+        dodgecool = maxdodgeCooltime;
+        m_Animator.SetTrigger("IsDodge");
+        m_SpriteRenderer.color = m_DodgeAlpha;
+        //StartCoroutine(IE_OnDodgeHandle = IE_OnAttack());
+    }
+
+    //private IEnumerator IE_OnDodge()
+    //{
+    //    state = State.Dodge;
+    //    dodgecool = maxdodgeCooltime;
+    //    m_Animator.SetTrigger("IsDodge");
+    //}
 
 }

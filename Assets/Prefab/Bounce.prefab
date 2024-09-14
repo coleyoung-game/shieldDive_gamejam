@@ -98,8 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd0645ad4912554d94d12a2587ca1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_BounceSpeeds:
+  - 30
+  - 45
   moveSpeed: 0
-  bounceSpeed: 30
   isMonster: 0
 --- !u!61 &2534777230839639767
 BoxCollider2D:

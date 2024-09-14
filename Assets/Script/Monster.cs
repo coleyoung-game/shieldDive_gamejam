@@ -8,9 +8,15 @@ public class Monster : MonoBehaviour
     GameObject player;
     TestPlayerDrop playerDrop;
     Rigidbody2D playerRigidBody2D;
+    BoxCollider2D m_BoxCollider2D;
+
+    [SerializeField] private float[] m_BounceSpeeds;
+
+    private int m_CurrLevel = 0;
+
 
     public float moveSpeed;
-    public float bounceSpeed;
+    //public float bounceSpeed;
     public bool isMonster;
 
     // Start is called before the first frame update
@@ -19,6 +25,7 @@ public class Monster : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerDrop = player.GetComponent<TestPlayerDrop>();
         playerRigidBody2D = player.GetComponent<Rigidbody2D>();
+        m_BoxCollider2D = GetComponent<BoxCollider2D>();
 
     }
 
@@ -29,7 +36,7 @@ public class Monster : MonoBehaviour
         {
             gameObject.transform.position += new Vector3(moveSpeed,0,0);
         }
-        if (gameObject.transform.position.x > GameSceneManager.Instance.WorldHeight || gameObject.transform.position.x < -GameSceneManager.Instance.WorldHeight)
+        if (gameObject.transform.position.x > GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2 || gameObject.transform.position.x < -GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2)
         {
             moveSpeed *= -1;
         }
@@ -50,7 +57,7 @@ public class Monster : MonoBehaviour
                 else if (playerDrop.state == State.Idle)
                 {
                     playerDrop.state = State.Hit;
-                    playerRigidBody2D.velocity = new Vector2(0f, bounceSpeed);
+                    playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
                 }
             }
 
@@ -59,7 +66,7 @@ public class Monster : MonoBehaviour
                 if (playerDrop.state == State.Idle)
                 {
                     playerDrop.state = State.Hit;
-                    playerRigidBody2D.velocity = new Vector2(0f, bounceSpeed);
+                    playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
                 }
             }
             
@@ -67,4 +74,13 @@ public class Monster : MonoBehaviour
         }
 
     }
+
+    public void LevelUp()
+    {
+        if (m_CurrLevel >= m_BounceSpeeds.Length - 1)
+            return;
+        m_CurrLevel++;
+    }
+
+    public int HasLevelCount() { return m_BounceSpeeds.Length; }
 }
