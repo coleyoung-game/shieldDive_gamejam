@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
 
     float sumTime;
 
-    TMP_Text timerText;
-
+    //TMP_Text timerText;
+    Text timerText;
     int tenmin;
     int min;
     int tensec;
@@ -20,7 +20,8 @@ public class Timer : MonoBehaviour
     void Start()
     {
         sumTime = 0f;
-        timerText = GetComponent<TMP_Text>();
+        //timerText = GetComponent<TMP_Text>();
+        timerText = GetComponent<Text>();
     }
 
     // Update is called once per frame
