@@ -180,11 +180,13 @@ public class TestPlayerDrop : MonoBehaviour
     {
         if (collision.CompareTag("Ground"))
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             rb.simulated = false;
             GameObject princess = GameObject.FindWithTag("Princess");
             princess.GetComponent<Animator>().SetTrigger("clap");
             audioManager.PlaySFX(audioManager.princessyay);
+            GameObject t_Dopamin = Instantiate(Resources.Load<GameObject>("dopamin"));
+            t_Dopamin.transform.position = princess.transform.position;
         }
     }
     private float m_Offset = -100;
