@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01d15631d9ba563438dd786ca8ea1c2c
+guid: 347295540710cf04ca43807c32e4a742
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -117,11 +117,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_02_0
+      name: Enemy_03_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 448
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -131,18 +131,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 244570259e92dce4ba5a8be1a25e30d7
-      internalID: 1900168998
+      spriteID: 1a77a0675b791934d9df32ceb26bf3ce
+      internalID: 851237578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_02_1
+      name: Enemy_03_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
+        x: 64
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -152,18 +152,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a14ce30785f0aee4aa423844c289ce90
-      internalID: -974004188
+      spriteID: 9ecc6a0863c58aa4a95bf87c56f72bce
+      internalID: -533240676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_02_2
+      name: Enemy_03_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
+        x: 128
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -173,18 +173,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 055e4e40c2ade9143b517b9d06fb1fba
-      internalID: 1308593747
+      spriteID: d81fd382ab2c8ab4faee0882e79e0f25
+      internalID: -786978938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_02_3
+      name: Enemy_03_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 192
+        y: 64
         width: 64
         height: 64
       alignment: 0
@@ -194,18 +194,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbac7302190260548a3f2550cdf0520e
-      internalID: 104713281
+      spriteID: de3761c7956d4f94ba9293b443626b3e
+      internalID: 973339723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_02_4
+      name: Enemy_03_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -215,18 +215,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb2543f67e30f5942a9e7d38ef1594dd
-      internalID: -725849136
+      spriteID: 7edaf0dbf01004e438199e17dd0f0ac4
+      internalID: 1674049446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_02_5
+      name: Enemy_03_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 64
+        y: 0
         width: 64
         height: 64
       alignment: 0
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c917e3a24ce2a6469710cbe708d043b
-      internalID: -1192606864
+      spriteID: 3817d6cd9392dac4b926edb1e0c20818
+      internalID: -584204809
       vertices: []
       indices: 
       edges: []
@@ -253,12 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_02_0: 1900168998
-      Enemy_02_1: -974004188
-      Enemy_02_2: 1308593747
-      Enemy_02_3: 104713281
-      Enemy_02_4: -725849136
-      Enemy_02_5: -1192606864
+      Enemy_03_0: 851237578
+      Enemy_03_1: -533240676
+      Enemy_03_2: -786978938
+      Enemy_03_3: 973339723
+      Enemy_03_4: 1674049446
+      Enemy_03_5: -584204809
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
