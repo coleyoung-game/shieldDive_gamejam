@@ -62,7 +62,7 @@ public class TestPlayerDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dodgecool > 0)
+        if (dodgecool > -2f)
         {
             dodgecool -= Time.deltaTime;
             if (dodgecool < maxdodgeCooltime - 1f && state == State.Dodge) 
