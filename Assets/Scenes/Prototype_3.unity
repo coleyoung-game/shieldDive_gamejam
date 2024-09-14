@@ -1113,6 +1113,7 @@ MonoBehaviour:
   - {fileID: 2534777230839639764, guid: 764e3a0466c385941a5105adba964a49, type: 3}
   - {fileID: 7761582358479414363, guid: 3b3ecf9c8aca84f409a7ac17cd197808, type: 3}
   - {fileID: 7761582358479414363, guid: c8e1578ce921e824fadb64adbf7c62b1, type: 3}
+  m_dragon: {fileID: 3115747024323071193, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
   _SpawnStartYPoint: -20
   m_SplitCount: 50
   m_Ratio: []
@@ -1594,13 +1595,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9725151131891426, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
+      propertyPath: drSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9725151131891426, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7560507756396452936, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7560507756396452936, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7560507756396452936, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1638,6 +1647,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7560507756396452937, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7560507756396452939, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
       propertyPath: m_Name
       value: Dragon
@@ -1646,7 +1659,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9725151131891426, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5a5f3fc52b01bd24a8dc0210f018821d, type: 3}
 --- !u!114 &8789726010603202516
 MonoBehaviour:

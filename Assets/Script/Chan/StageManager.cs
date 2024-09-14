@@ -24,6 +24,7 @@ namespace Chan
         [SerializeField] private Stage_Background m_BackgroundSettings;
         [SerializeField] private GameObject m_Player;
         [SerializeField] private Monster[] m_Monsters;
+        [SerializeField] private Monster m_dragon;
         [Tooltip("Min, Max")]
         [SerializeField] private float _SpawnStartYPoint;
         [SerializeField] private int m_SplitCount;
@@ -108,6 +109,10 @@ namespace Chan
                     t_TempVec.x = Random.Range(-GameSceneManager.Instance.WorldWidth, GameSceneManager.Instance.WorldWidth);
                     t_Obs.transform.position = t_TempVec;
                     m_CurrYPoint++;
+                    if (m_CurrYPoint == 30)
+                    {
+                        Monster t_Drg = Instantiate(m_dragon);
+                    }
                 }
             }
         }

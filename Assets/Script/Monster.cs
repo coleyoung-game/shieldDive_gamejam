@@ -23,6 +23,7 @@ public class Monster : MonoBehaviour
     public float moveSpeed;
     //public float bounceSpeed;
     public bool isMonster;
+    public bool isDragon;
 
     AudioManager audioManager;
     
@@ -40,6 +41,10 @@ public class Monster : MonoBehaviour
         m_BoxCollider2D = GetComponent<BoxCollider2D>();
         m_Anim = GetComponent<Animator>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        if (isDragon)
+        {
+            audioManager.PlaySFX(audioManager.dragonroar);
+        }
     }
 
     // Update is called once per frame
@@ -48,6 +53,14 @@ public class Monster : MonoBehaviour
         if (isMonster)
         {
             gameObject.transform.position += new Vector3(moveSpeed,0,0);
+        }
+        else if (isDragon)
+        {
+            Vector3 temp = transform.position;
+            temp.x += moveSpeed;
+            temp.y = player.transform.position.y;
+            transform.position = temp;
+            return;
         }
         if (gameObject.transform.position.x > GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2 || gameObject.transform.position.x < -GameSceneManager.Instance.WorldWidth - m_BoxCollider2D.size.x / 2)
         {
@@ -58,7 +71,7 @@ public class Monster : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == player)
+         if (collision.gameObject == player)
         {
             if (isMonster)
             {
@@ -97,7 +110,11 @@ public class Monster : MonoBehaviour
         bool t_IsAttack = playerDrop.state == State.Att;
         playerDrop.state = State.Hit;
         playerRigidBody2D.velocity = new Vector2(0f, t_IsAttack ? m_BounceSpeeds[m_CurrLevel] * 2 : m_BounceSpeeds[m_CurrLevel]);
-        if (gameObject.tag == "Bounce")
+        if (isDragon)
+        {
+            audioManager.PlaySFX(audioManager.spike);
+        }
+        else if (gameObject.tag == "Bounce")
         {
             audioManager.PlaySFX(audioManager.trampoline);
         }

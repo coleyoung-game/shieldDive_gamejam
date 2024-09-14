@@ -29,7 +29,7 @@ public class Dragon : MonoBehaviour
     {
         if (collision.gameObject == player)
         {
-
+           
         }
     }
 }
