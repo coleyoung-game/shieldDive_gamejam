@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PrincessEnd : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class PrincessEnd : MonoBehaviour
     public void EndRestart()
     {
 
-        Debug.Log("aaa");
+        SceneManager.LoadScene("SampleScene");
 
     }
 }

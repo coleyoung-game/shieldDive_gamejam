@@ -36,6 +36,7 @@ public class TestPlayerDrop : MonoBehaviour
     public float gravityValue;
     public float attSpeed;
     public float maxdodgeCooltime;
+    public float dodgeLength;
     float dodgecool;
 
 
@@ -62,10 +63,10 @@ public class TestPlayerDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dodgecool > 0)
+        if (dodgecool > -2f)
         {
             dodgecool -= Time.deltaTime;
-            if (dodgecool < maxdodgeCooltime - 1f && state == State.Dodge) 
+            if (dodgecool < maxdodgeCooltime - dodgeLength && state == State.Dodge) 
             {
                 state = State.Idle;
                 m_SpriteRenderer.color = Color.white;
