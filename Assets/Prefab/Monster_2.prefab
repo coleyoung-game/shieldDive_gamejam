@@ -109,6 +109,7 @@ MonoBehaviour:
   m_IsDestroy: 0
   moveSpeed: 0.05
   isMonster: 1
+  isDragon: 0
 --- !u!61 &7761582358479414362
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.005037658, y: 0.083961055}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.32871938, y: 0.31864402}
   m_EdgeRadius: 0
 --- !u!95 &8175905661101700524
 Animator:

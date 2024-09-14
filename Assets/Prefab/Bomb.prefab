@@ -106,6 +106,7 @@ MonoBehaviour:
   m_IsDestroy: 1
   moveSpeed: 0
   isMonster: 0
+  isDragon: 0
 --- !u!61 &2534777230839639767
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
 --- !u!95 &3930478528178717899
 Animator:

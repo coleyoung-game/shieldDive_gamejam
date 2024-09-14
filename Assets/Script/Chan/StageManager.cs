@@ -25,6 +25,7 @@ namespace Chan
         [SerializeField] private GameObject m_Player;
         [SerializeField] private Monster[] m_Monsters;
         [SerializeField] private Monster m_dragon;
+        [SerializeField] private Transform m_MonsterHadle;
         [Tooltip("Min, Max")]
         [SerializeField] private float _SpawnStartYPoint;
         [SerializeField] private int m_SplitCount;
@@ -104,7 +105,7 @@ namespace Chan
                 for (int i = 0; i < m_CreateCount; i++)
                 {
                     //GameObject t_Obs = Instantiate(Resources.Load<GameObject>("OBS_A"));
-                    Monster t_Obs = Instantiate(m_Monsters[Random.Range(0, m_Monsters.Length)]);
+                    Monster t_Obs = Instantiate(m_Monsters[Random.Range(0, m_Monsters.Length)], m_MonsterHadle);
                     t_Obs.Init();
                     // SplitCount(몬스터 스폰 빈도) / Monster Maxlevel
                     if (m_CurrYPoint % (m_SplitCount / t_Obs.HasLevelCount()) == 0)
@@ -132,7 +133,7 @@ namespace Chan
                     m_CurrYPoint++;
                     if (m_CurrYPoint == 30)
                     {
-                        Monster t_Drg = Instantiate(m_dragon);
+                        Monster t_Drg = Instantiate(m_dragon, m_MonsterHadle);
                         t_Drg.Init();
                     }
                 }
