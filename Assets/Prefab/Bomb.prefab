@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BounceSpeeds:
+  - 20
   - 30
-  - 45
   m_CurrLevel: 0
   m_IsDestroy: 1
   moveSpeed: 0

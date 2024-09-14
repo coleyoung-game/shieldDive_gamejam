@@ -65,11 +65,11 @@ namespace Chan
         private float GenerateBackground()
         {
             Vector3 t_DeployPos = Vector3.zero;
-
+            
             GameObject t_BG = Instantiate(Resources.Load<GameObject>("BG_Sky"));
             t_BG.transform.position = m_BackgroundSettings.StartPos;
             t_DeployPos = m_BackgroundSettings.StartPos;
-
+            
             for (int i = 0; i < 2* m_BackgroundSettings.Count - 1; i++)
             {
                 t_BG = Instantiate(Resources.Load<GameObject>("BG_Sky"));
@@ -81,6 +81,7 @@ namespace Chan
                 t_BG.transform.position = t_DeployPos;
             }
             return t_DeployPos.y;
+            //return -388; 
         }
         private void CreateObstacle()
         {

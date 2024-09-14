@@ -177,10 +177,6 @@ public class TestPlayerDrop : MonoBehaviour
             princess.GetComponent<Animator>().SetTrigger("clap");
             audioManager.PlaySFX(audioManager.princessyay);
         }
-        if (collision.CompareTag("Clamp"))
-        {
-            rb.velocity = Vector2.zero;
-        }
     }
     private float m_Offset = -100;
     private void DownSpeedUp()
@@ -210,7 +206,15 @@ public class TestPlayerDrop : MonoBehaviour
         state = State.Att;
         rb.velocity = new Vector2(0f, -attSpeed);
         yield return new WaitUntil(() => m_Animator.GetCurrentAnimatorStateInfo(0).IsName("c_Attack") && m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.98f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
+
+        if (state == State.Hit)
+        {
+            IE_OnAttackHandle = null;
+            state = State.Idle;
+            yield break;
+        }
+
         state = State.Idle;
         rb.velocity = t_PrevVelocity;
         IE_OnAttackHandle = null;

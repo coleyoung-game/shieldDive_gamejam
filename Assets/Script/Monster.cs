@@ -64,10 +64,10 @@ public class Monster : MonoBehaviour
             {
                 if (playerDrop.state == State.Att)
                 {
-                    Destroy(gameObject);
-                    playerDrop.state = State.Idle;
                     playerRigidBody2D.velocity = new Vector2(0f, 1f);
+                    playerDrop.state = State.Idle;
                     audioManager.PlaySFX(audioManager.attacksound);
+                    Destroy(gameObject);
                 }
                 else if (playerDrop.state == State.Idle)
                 {
