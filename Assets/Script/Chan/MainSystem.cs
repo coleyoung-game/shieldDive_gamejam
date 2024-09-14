@@ -12,8 +12,14 @@ public class MainSystem : MonoBehaviour
 
     private void Awake()
     {
-        m_Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (m_Instance == null)
+        {
+            m_Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure only one instance exists
+        }
     }
-
 }
