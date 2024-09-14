@@ -6,6 +6,7 @@ public class MainSystem : MonoBehaviour
 {
     private static MainSystem m_Instance;
     public static MainSystem Instance { get { return m_Instance; } }
+    public GameObject Popup;
     public float BGM_Volume;
     public float SFX_Volume;
 
