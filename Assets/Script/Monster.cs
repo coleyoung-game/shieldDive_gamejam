@@ -69,7 +69,7 @@ public class Monster : MonoBehaviour
 
             else
             {
-                if (playerDrop.state == State.Idle)
+                if (playerDrop.state == State.Idle || playerDrop.state == State.Att)
                 {
                     playerDrop.state = State.Hit;
                     playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
