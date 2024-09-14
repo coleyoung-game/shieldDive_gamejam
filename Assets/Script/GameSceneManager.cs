@@ -26,7 +26,7 @@ public class GameSceneManager : MonoBehaviour
     private void Init()
     {
         float t_Aspect = (float)Screen.width / Screen.height;
-        m_WorldHeight = GetComponent<Camera>().orthographicSize;// * 2;
+        m_WorldHeight = Camera.main.orthographicSize;// * 2;
         m_WorldWidth = m_WorldHeight * t_Aspect;
         Debug.Log($"m_WorldWidth : {m_WorldWidth}, m_WorldHeight : {m_WorldHeight}");
     }
