@@ -15,6 +15,7 @@ public enum State
 public class TestPlayerDrop : MonoBehaviour
 {
     Rigidbody2D rb;
+    BoxCollider2D Boxcollider;
 
     #region Y 값 제한 로직
     private bool m_IsClamp = false;
@@ -42,6 +43,7 @@ public class TestPlayerDrop : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2 (0f,0f);
 
+        Boxcollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -65,15 +67,21 @@ public class TestPlayerDrop : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A))
             {
-                Vector2 temp = rb.velocity;
-                temp.x = -sideSpeed;
-                rb.velocity = temp;
+                if (gameObject.transform.position.x > - (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x/2))
+                {
+                    Vector2 temp = rb.velocity;
+                    temp.x = -sideSpeed;
+                    rb.velocity = temp;
+                }
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                Vector2 temp = rb.velocity;
-                temp.x = sideSpeed;
-                rb.velocity = temp;
+                if (gameObject.transform.position.x < (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x / 2))
+                {
+                    Vector2 temp = rb.velocity;
+                    temp.x = sideSpeed;
+                    rb.velocity = temp;
+                }
             }
             else
             {
