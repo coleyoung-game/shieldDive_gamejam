@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
     public bool isMonster;
 
     AudioManager audioManager;
+    
 
     private void Awake()
     {
@@ -59,11 +60,13 @@ public class Monster : MonoBehaviour
                     Destroy(gameObject);
                     playerDrop.state = State.Idle;
                     playerRigidBody2D.velocity = new Vector2(0f, 1f);
+                    audioManager.PlaySFX(audioManager.attacksound);
                 }
                 else if (playerDrop.state == State.Idle)
                 {
                     playerDrop.state = State.Hit;
                     playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
+                    audioManager.PlaySFX(audioManager.trampoline);
                 }
             }
 
@@ -73,6 +76,7 @@ public class Monster : MonoBehaviour
                 {
                     playerDrop.state = State.Hit;
                     playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
+                    audioManager.PlaySFX(audioManager.trampoline);
                 }
             }
             
