@@ -115,7 +115,7 @@ public class TestPlayerDrop : MonoBehaviour
                 OnAttack();
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftControl) && IE_OnAttackHandle == null)
             {
                 OnDodge();
             }
