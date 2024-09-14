@@ -104,7 +104,7 @@ namespace Chan
                     }
                     // 
                     Vector3 t_TempVec = Vector3.up * (m_Player.transform.position.y - 13);
-                    t_TempVec.x = Random.Range(-3.0f, 3.0f);
+                    t_TempVec.x = Random.Range(-GameSceneManager.Instance.WorldWidth, GameSceneManager.Instance.WorldWidth);
                     t_Obs.transform.position = t_TempVec;
                     m_CurrYPoint++;
                 }

@@ -90,6 +90,12 @@ public class TestPlayerDrop : MonoBehaviour
                     temp.x = -sideSpeed;
                     rb.velocity = temp;
                 }
+                else
+                {
+                    Vector2 temp = rb.velocity;
+                    temp.x = 0f;
+                    rb.velocity = temp;
+                }
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -98,6 +104,12 @@ public class TestPlayerDrop : MonoBehaviour
                     m_SpriteRenderer.flipX = true;
                     Vector2 temp = rb.velocity;
                     temp.x = sideSpeed;
+                    rb.velocity = temp;
+                }
+                else
+                {
+                    Vector2 temp = rb.velocity;
+                    temp.x = 0f;
                     rb.velocity = temp;
                 }
             }
@@ -207,6 +219,10 @@ public class TestPlayerDrop : MonoBehaviour
     {
         if (IE_OnDodgeHandle != null)
             return;
+        if (dodgecool > 0)
+        {
+            return;
+        }
         state = State.Dodge;
         dodgecool = maxdodgeCooltime;
         m_Animator.SetTrigger("IsDodge");
