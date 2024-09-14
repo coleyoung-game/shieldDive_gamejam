@@ -14,6 +14,6 @@ public class MainMenuBttControl : MonoBehaviour
 
     public void SettingBttClick()
     {
-
+        SceneManager.LoadScene("GameSettings");
     }
 }
