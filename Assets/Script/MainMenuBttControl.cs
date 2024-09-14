@@ -8,7 +8,7 @@ public class MainMenuBttControl : MonoBehaviour
     // Start is called before the first frame update
     public void StartBttClick()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Prototype_3");
 
     }
 

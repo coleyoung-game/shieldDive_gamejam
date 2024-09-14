@@ -17,7 +17,7 @@ public class PrincessEnd : MonoBehaviour
     public void EndRestart()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainMenu");
 
     }
 }

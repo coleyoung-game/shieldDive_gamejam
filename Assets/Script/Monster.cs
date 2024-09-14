@@ -74,7 +74,7 @@ public class Monster : MonoBehaviour
                     playerDrop.state = State.Hit;
                     playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
                     Debug.Log($"playerRigidBody2D.velocity : {playerRigidBody2D.velocity}");
-                    audioManager.PlaySFX(audioManager.trampoline);
+                    audioManager.PlaySFX(audioManager.spike);
                 }
             }
 
@@ -97,7 +97,14 @@ public class Monster : MonoBehaviour
         bool t_IsAttack = playerDrop.state == State.Att;
         playerDrop.state = State.Hit;
         playerRigidBody2D.velocity = new Vector2(0f, t_IsAttack ? m_BounceSpeeds[m_CurrLevel] * 2 : m_BounceSpeeds[m_CurrLevel]);
-        audioManager.PlaySFX(audioManager.trampoline);
+        if (gameObject.tag == "Bounce")
+        {
+            audioManager.PlaySFX(audioManager.trampoline);
+        }
+        else if (gameObject.tag == "Bomb")
+        {
+            audioManager.PlaySFX(audioManager.bombblow2);
+        }
         m_Anim.SetBool("IsAction", true);
         yield return new WaitUntil(() => m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Action") && m_Anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.98f);
         if (m_IsDestroy)
