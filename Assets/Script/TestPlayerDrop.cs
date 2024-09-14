@@ -207,6 +207,10 @@ public class TestPlayerDrop : MonoBehaviour
     {
         if (IE_OnDodgeHandle != null)
             return;
+        if (dodgecool > 0)
+        {
+            return;
+        }
         state = State.Dodge;
         dodgecool = maxdodgeCooltime;
         m_Animator.SetTrigger("IsDodge");
