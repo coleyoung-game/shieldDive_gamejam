@@ -16,7 +16,7 @@ public enum State
 public class TestPlayerDrop : MonoBehaviour
 {
     private Animator m_Animator;
-    private SpriteRenderer m_SpriteRenderer;
+    public SpriteRenderer m_SpriteRenderer;
     Rigidbody2D rb;
     BoxCollider2D Boxcollider;
 
@@ -24,6 +24,7 @@ public class TestPlayerDrop : MonoBehaviour
     private IEnumerator IE_OnDodgeHandle = null;
 
     private Color m_DodgeAlpha = new Color(1, 1, 1, 0.5f);
+    private Color m_HitCol = new Color(1, 0.5f, 0.5f);
    
 
     #region Y �� ���� ����
@@ -138,6 +139,7 @@ public class TestPlayerDrop : MonoBehaviour
             if (rb.velocity.y < 0f)
             {
                 state = State.Idle;
+                m_SpriteRenderer.color = Color.white;
                 rb.velocity = new Vector2(0f, 0f);
             }
         }
@@ -212,10 +214,12 @@ public class TestPlayerDrop : MonoBehaviour
         {
             IE_OnAttackHandle = null;
             state = State.Idle;
+            m_SpriteRenderer.color = Color.white;
             yield break;
         }
 
         state = State.Idle;
+        m_SpriteRenderer.color = Color.white;
         rb.velocity = t_PrevVelocity;
         IE_OnAttackHandle = null;
     }

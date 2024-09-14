@@ -13,6 +13,8 @@ public class Monster : MonoBehaviour
     private Animator m_Anim;
     private SpriteRenderer m_SpriteRenderer;
 
+    private Color m_HitCol = new Color(1, 0.5f, 0.5f);
+
     [SerializeField] private float[] m_BounceSpeeds;
 
     private IEnumerator IE_EffectAnimHandle = null;
@@ -79,12 +81,14 @@ public class Monster : MonoBehaviour
                 {
                     playerRigidBody2D.velocity = new Vector2(0f, 1f);
                     playerDrop.state = State.Idle;
+                    playerDrop.m_SpriteRenderer.color = Color.white;
                     audioManager.PlaySFX(audioManager.attacksound);
                     Destroy(gameObject);
                 }
                 else if (playerDrop.state == State.Idle)
                 {
                     playerDrop.state = State.Hit;
+                    playerDrop.m_SpriteRenderer.color = m_HitCol;
                     playerRigidBody2D.velocity = new Vector2(0f, m_BounceSpeeds[m_CurrLevel]);
                     Debug.Log($"playerRigidBody2D.velocity : {playerRigidBody2D.velocity}");
                     audioManager.PlaySFX(audioManager.spike);
@@ -109,6 +113,7 @@ public class Monster : MonoBehaviour
     {
         bool t_IsAttack = playerDrop.state == State.Att;
         playerDrop.state = State.Hit;
+        playerDrop.m_SpriteRenderer.color = m_HitCol;
         playerRigidBody2D.velocity = new Vector2(0f, t_IsAttack ? m_BounceSpeeds[m_CurrLevel] * 2 : m_BounceSpeeds[m_CurrLevel]);
         if (isDragon)
         {
