@@ -16,7 +16,7 @@ public class PrincessEnd : MonoBehaviour
     // Update is called once per frame
     public void EndRestart()
     {
-
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("SampleScene");
 
     }
