@@ -8,7 +8,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Timer : MonoBehaviour
 {
-
+    Animator animator;
     float sumTime;
     float sumCalTime;
 
@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = gameObject.transform.parent.gameObject.GetComponent<Animator>();
         if (!PlayerPrefs.HasKey("highscore"))
         {
             PlayerPrefs.SetFloat("highscore", 5000);
@@ -45,6 +45,7 @@ public class Timer : MonoBehaviour
     {
         if (stop)
         {
+            animator.SetTrigger("down");
             TimerTxt = timerText.text;
             if (sumTime < PlayerPrefs.GetFloat("highscore"))
             {
