@@ -17,7 +17,16 @@ public class PrincessEnd : MonoBehaviour
     public void EndRestart()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("MainMenu");
+        Timer t_Timer = FindObjectOfType<Timer>();
+        string t_Title = t_Timer.IsHighscore ? "Conguraturation!" : "Record";
+        string t_Dec = t_Timer.IsHighscore ? $"New Record! \n {t_Timer.TimerTxt}" : t_Timer.TimerTxt;
+        MainSystem.Instance.Popup.SetData(t_Title, t_Dec, "OK", () =>
+        {
+            MainSystem.Instance.Popup.SetClose();
+            MainSystem.Instance.SceneLoader.LoadScene("MainMenu");
+        });
+        MainSystem.Instance.Popup.SetOpen();
+        //SceneManager.LoadScene("MainMenu");
 
     }
 }

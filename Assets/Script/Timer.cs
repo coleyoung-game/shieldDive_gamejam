@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
@@ -12,8 +13,9 @@ public class Timer : MonoBehaviour
     float sumCalTime;
 
     Text highText;
-
+    public bool IsHighscore = false;
     public bool stop;
+    public string TimerTxt;
     //TMP_Text timerText;
     Text timerText;
     int _tenmin;
@@ -43,10 +45,13 @@ public class Timer : MonoBehaviour
     {
         if (stop)
         {
+            TimerTxt = timerText.text;
             if (sumTime < PlayerPrefs.GetFloat("highscore"))
             {
+                IsHighscore = true;
                 PlayerPrefs.SetFloat("highscore", sumTime);
                 highText = CalTime(highText, PlayerPrefs.GetFloat("highscore"));
+                TimerTxt = highText.text;
             }
             return;
         }
@@ -104,6 +109,5 @@ public class Timer : MonoBehaviour
         ttext.text = tenmin.ToString() + min.ToString() + ":" + tensec.ToString() + sec.ToString() + "." + milsec.ToString();
         return ttext;
     }
-
 
 }
