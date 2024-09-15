@@ -61,8 +61,9 @@ public class TestPlayerDrop : MonoBehaviour
             m_SpriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2 (0f,0f);
-        timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
         Boxcollider = GetComponent<BoxCollider2D>();
+        Timer t_Timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
+        if (t_Timer != null) timer = t_Timer;
     }
 
     // Update is called once per frame
@@ -71,7 +72,7 @@ public class TestPlayerDrop : MonoBehaviour
         if (dodgecool > -2f)
         {
             dodgecool -= Time.deltaTime;
-            Debug.Log($"dodgecool : {dodgecool}");
+            //Debug.Log($"dodgecool : {dodgecool}");
             if (dodgecool < 0.05f)
                 m_WorldCanvas.SetActive(false);
             else
@@ -92,7 +93,7 @@ public class TestPlayerDrop : MonoBehaviour
 
         if (state == State.Idle || state == State.Dodge)
         {
-            if (Input.GetAxis("Horizontal") < 0)
+            if (Input.GetKey(KeyCode.A))
             {
                 if (gameObject.transform.position.x > - (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x/2))
                 {
@@ -108,7 +109,7 @@ public class TestPlayerDrop : MonoBehaviour
                     rb.velocity = temp;
                 }
             }
-            else if (Input.GetAxis("Horizontal") > 0)
+            else if (Input.GetKey(KeyCode.D))
             {
                 if (gameObject.transform.position.x < (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x / 2))
                 {
@@ -191,7 +192,12 @@ public class TestPlayerDrop : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             //Time.timeScale = 0;
-            timer.stop = true;
+            if(timer != null)
+                timer.stop = true;
+            //string t_TimerStr = timer.TimerTxt;
+            //
+            //MainSystem.Instance.Popup.SetData("Record", $"{t_TimerStr}", "OK" );
+
             rb.simulated = false;
             GameObject princess = GameObject.FindWithTag("Princess");
             princess.GetComponent<Animator>().SetTrigger("clap");
