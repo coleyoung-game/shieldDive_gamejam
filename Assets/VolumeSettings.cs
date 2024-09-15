@@ -28,34 +28,58 @@ public class VolumeSettings : MonoBehaviour
 
     public void SetMusicVolume()
     {
-        if (myMixer == null || musicSlider == null)
+        if (myMixer == null)
         {
-            Debug.LogError("Required components are not set.");
+            Debug.LogError("myMixer is not set.");
+            return;
+        }
+        
+        if (musicSlider == null)
+        {
+            Debug.LogError("musicSlider is not set.");
             return;
         }
 
         float volume = musicSlider.value;
         myMixer.SetFloat("music", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("musicVolume", volume);
-        MainSystem.Instance.BGM_Volume = volume;
-    }    
+        if (MainSystem.Instance != null)
+        {
+            MainSystem.Instance.BGM_Volume = volume;
+        }
+    }
 
     public void SetSFXVolume()
     {
-        if (myMixer == null || SFXSlider == null)
+        if (myMixer == null)
         {
-            Debug.LogError("Required components are not set.");
+            Debug.LogError("myMixer is not set.");
+            return;
+        }
+        
+        if (SFXSlider == null)
+        {
+            Debug.LogError("SFXSlider is not set.");
             return;
         }
 
         float volume = SFXSlider.value;
         myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("SFXVolume", volume);
-        MainSystem.Instance.SFX_Volume = volume;
-    } 
+        if (MainSystem.Instance != null)
+        {
+            MainSystem.Instance.SFX_Volume = volume;
+        }
+    }
 
     private void LoadVolume()
     {
+        if (musicSlider == null || SFXSlider == null)
+        {
+            Debug.LogError("Sliders are not set.");
+            return;
+        }
+
         if (PlayerPrefs.HasKey("musicVolume"))
         {
             musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
