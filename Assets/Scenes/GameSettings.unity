@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 959934031}
   - component: {fileID: 959934030}
   - component: {fileID: 959934029}
+  - component: {fileID: 959934032}
   m_Layer: 5
   m_Name: cameraButton
   m_TagString: Untagged
@@ -997,7 +998,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1022,16 +1023,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 59fcc3161ab4a944d9f029509719a932, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 959934032}
+        m_TargetAssemblyTypeName: Chan.ToggleButtonController, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: OnShakeButtonClick()
+          m_StringArgument: UpdateButtonImage()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &959934030
@@ -1072,6 +1073,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959934027}
   m_CullTransparentMesh: 1
+--- !u!114 &959934032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959934027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f5c38adc12944498f7d83dcd9c9da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSprite: {fileID: 1313477530, guid: 5bac5b8ac8e7c8a4ba89499411196842, type: 3}
+  offSprite: {fileID: -461073175, guid: 5bac5b8ac8e7c8a4ba89499411196842, type: 3}
 --- !u!1 &973562357
 GameObject:
   m_ObjectHideFlags: 0

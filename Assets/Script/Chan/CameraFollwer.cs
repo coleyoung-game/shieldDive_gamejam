@@ -57,12 +57,6 @@ namespace Chan
         {
             // PlayerPrefs에서 진동 상태를 읽어와서 진동을 제어
             bool isShakeEnabled = PlayerPrefs.GetInt("CameraShakeEnabled", 1) == 1; // 기본값은 진동이 켜짐(1)
-
-            if (!isShakeEnabled)
-            {
-                StopAllCoroutines();
-                m_IsVibe = false;
-            }
         }
         private IEnumerator IE_CameraShake(float _IterTime, int _Count, float _Power)
         {
