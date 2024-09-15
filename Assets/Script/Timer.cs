@@ -1,28 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Timer : MonoBehaviour
 {
 
     float sumTime;
+    float sumCalTime;
+
+    Text highText;
 
     public bool stop;
     //TMP_Text timerText;
     Text timerText;
-    int tenmin;
-    int min;
-    int tensec;
-    int sec;
-    int milsec;
+    int _tenmin;
+    int _min;
+    int _tensec;
+    int _sec;
+    int _milsec;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        if (!PlayerPrefs.HasKey("highscore"))
+        {
+            PlayerPrefs.SetFloat("highscore", 5000);
+        }
+        highText = gameObject.transform.parent.gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        highText = CalTime(highText, PlayerPrefs.GetFloat("highscore"));
         stop = false;
         sumTime = 0f;
-        //timerText = GetComponent<TMP_Text>();
+        sumCalTime = 0f;
         timerText = GetComponent<Text>();
     }
 
@@ -31,36 +43,67 @@ public class Timer : MonoBehaviour
     {
         if (stop)
         {
+            if (sumTime < PlayerPrefs.GetFloat("highscore"))
+            {
+                PlayerPrefs.SetFloat("highscore", sumTime);
+                highText = CalTime(highText, PlayerPrefs.GetFloat("highscore"));
+            }
             return;
         }
+
+        sumCalTime += Time.deltaTime;
         sumTime += Time.deltaTime;
-        if ( sumTime > 0.1f)
+
+        if ( sumCalTime > 0.1f)
         {
-            sumTime -= 0.1f;
-            milsec ++;
+            sumCalTime -= 0.1f;
+            _milsec ++;
         }
-        if (milsec >= 10)
+        if (_milsec >= 10)
         {
-            milsec -= 10;
-            sec++;
+            _milsec -= 10;
+            _sec++;
         }
-        if (sec >= 10)
+        if (_sec >= 10)
         {
-            sec -= 10;
-            tensec++;
+            _sec -= 10;
+            _tensec++;
         }
-        if (tensec >= 6)
+        if (_tensec >= 6)
         {
-            tensec -= 6;
-            min++;
+            _tensec -= 6;
+            _min++;
         }
-        if (min >= 10)
+        if (_min >= 10)
         {
-            min -= 10;
-            tenmin++;
+            _min -= 10;
+            _tenmin++;
         }
         
-        timerText.text = tenmin.ToString() + min.ToString() + ":"+ tensec.ToString() + sec.ToString() + "." +milsec.ToString() ;
+        timerText.text = _tenmin.ToString() + _min.ToString() + ":"+ _tensec.ToString() + _sec.ToString() + "." +_milsec.ToString() ;
 
     }
+
+    Text CalTime(Text ttext, float inputTime)
+    {
+        int tenmin = 0;
+        int min = 0;
+        int tensec = 0;
+        int sec = 0;
+        int milsec = 0;
+
+        tenmin = (int)inputTime / 600;
+        inputTime = inputTime - tenmin * 600;
+        min = (int)inputTime / 60;
+        inputTime = inputTime - min * 60;
+        tensec = (int)inputTime / 10;
+        inputTime = inputTime - tensec * 10;
+        sec = (int)inputTime;
+        milsec = (int)((inputTime - (float)sec) * 10f);
+
+        ttext.text = tenmin.ToString() + min.ToString() + ":" + tensec.ToString() + sec.ToString() + "." + milsec.ToString();
+        return ttext;
+    }
+
+
 }

@@ -92,7 +92,7 @@ public class TestPlayerDrop : MonoBehaviour
 
         if (state == State.Idle || state == State.Dodge)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetAxis("Horizontal") < 0)
             {
                 if (gameObject.transform.position.x > - (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x/2))
                 {
@@ -108,7 +108,7 @@ public class TestPlayerDrop : MonoBehaviour
                     rb.velocity = temp;
                 }
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetAxis("Horizontal") > 0)
             {
                 if (gameObject.transform.position.x < (GameSceneManager.Instance.WorldWidth - Boxcollider.size.x / 2))
                 {
