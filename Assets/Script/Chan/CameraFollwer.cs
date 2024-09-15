@@ -23,7 +23,7 @@ namespace Chan
         {
             if (Input.GetKeyDown(KeyCode.N))
             {
-                StartCoroutine(IE_Vibration(gameObject, 0.05f, 7, 0.2f));
+                StartCoroutine(IE_CameraShake(0.05f, 7, 0.2f));
             }
         }
 
@@ -49,7 +49,12 @@ namespace Chan
             Debug.Log($"m_WorldWidth : {m_WorldWidth}, m_WorldHeight : {m_WorldHeight}");
         }
 
-        private IEnumerator IE_Vibration(GameObject _Obj, float _IterTime, int _Count, float _Power)
+        public void CameraShake(float _IterTime, int _Count, float _Power)
+        {
+            StartCoroutine(IE_CameraShake( _IterTime, _Count, _Power));
+        }
+
+        private IEnumerator IE_CameraShake(float _IterTime, int _Count, float _Power)
         {
             m_IsVibe = true;
             int t_CurrCount = 0;
@@ -59,7 +64,7 @@ namespace Chan
                 t_CurrCount++;
                 m_CalcCameraPos = Vector3.up * (m_PlayerPos.position.y + m_CameraPos.y > 0 ? 0 : m_PlayerPos.position.y + m_CameraPos.y);
                 m_CalcCameraPos.z = -1;
-                _Obj.transform.position = new Vector3(Random.Range(-_Power, _Power), m_CalcCameraPos.y + Random.Range(-_Power, _Power), -1);
+                transform.position = new Vector3(Random.Range(-_Power, _Power), m_CalcCameraPos.y + Random.Range(-_Power, _Power), -1);
             }
             m_IsVibe = false;
         }

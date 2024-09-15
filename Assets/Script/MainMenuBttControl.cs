@@ -8,8 +8,8 @@ public class MainMenuBttControl : MonoBehaviour
     [SerializeField] private string m_StartSceneName;
     public void StartBttClick()
     {
-        SceneManager.LoadScene(m_StartSceneName);
-
+        //SceneManager.LoadScene(m_StartSceneName);
+        MainSystem.Instance.SceneLoader.LoadScene(m_StartSceneName);
     }
 
     public void SettingBttClick()

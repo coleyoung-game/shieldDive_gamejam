@@ -91,6 +91,7 @@ public class Monster : MonoBehaviour
                 if (playerDrop.state == State.Att)
                 {
                     GameObject t_Obj = Instantiate(Resources.Load<GameObject>("Flash_round_ellow"));
+                    GameSceneManager.Instance.CameraShake();
                     //m_HitEffect.SetActive(true);
                     t_Obj.transform.position = collision.ClosestPoint(transform.position);
                     PoolingManager.Instance.EnqueueObject(t_Obj);
