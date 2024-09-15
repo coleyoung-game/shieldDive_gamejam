@@ -10,7 +10,7 @@ public class MainSystem : MonoBehaviour
 
     public SceneLoader SceneLoader { get { return m_SceneLoader; } }
     
-    public GameObject Popup;
+    public Popup Popup;
     public float BGM_Volume;
     public float SFX_Volume;
 
