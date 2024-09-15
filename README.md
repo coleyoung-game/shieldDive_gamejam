@@ -154,5 +154,4 @@
 ![2024-09-14 21 37 43](https://github.com/user-attachments/assets/2aa52508-cccf-4861-902f-d0ff16b8d783)
 
 
-https://github.com/user-attachments/assets/2d268843-e76c-4147-830f-67b955f33569
 
