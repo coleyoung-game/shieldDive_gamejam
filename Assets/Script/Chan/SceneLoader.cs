@@ -31,7 +31,7 @@ public class SceneLoader : MonoBehaviour
         var t_Sceneload = SceneManager.LoadSceneAsync(_Name);
         yield return new WaitUntil(() => t_Sceneload.isDone);
         yield return new WaitForSeconds(0.5f);
-        yield return IE_FadeEffect(false, 2);
+        yield return IE_FadeEffect(false, 1);
         Debug.Log($"[{_Name}]LoadScene Completed.");
         yield return null;
     }
@@ -43,7 +43,7 @@ public class SceneLoader : MonoBehaviour
         while(t_CurrTime < _Time)
         {
             t_CurrTime += Time.deltaTime;
-            m_Img_Fade.color = new Color(0, 0, 0, _IsIn ? t_CurrTime / _Time : 1 - t_CurrTime / _Time);
+            m_Img_Fade.color = new Color(1, 1, 1, _IsIn ? t_CurrTime / _Time : 1 - t_CurrTime / _Time);
             yield return null;
         }
         //m_Img_Fade.color = Color.black;
